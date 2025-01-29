@@ -9,8 +9,8 @@
         </button>
     </div>
     <div class="mb-3">
-        <label for="search_rfid" class="form-label">Search by Kartu</label>
-        <input type="text" class="form-control" id="search_rfid" placeholder="Enter RFID">
+        <label for="search_rfid" class="form-label">Search by Kode Gelang</label>
+        <input type="text" class="form-control" id="search_rfid" placeholder="Enter Kode Gelang">
     </div>
     <table class="table" id="booking-table">
         <thead>
@@ -49,7 +49,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="room_id" class="form-label">Nomor Room                        </label>
+                        <label for="room_id" class="form-label">Nomor Room</label>
                         <input type="text" class="form-control" id="booking_room_id" name="booking_room_id" required>
                     </div>
                     {{-- <div class="mb-3">
@@ -81,11 +81,12 @@
                         <label for="rfid" class="form-label">Kode Gelang</label>
                         <input type="text" class="form-control" id="rfid" name="rfid" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="pendamping" class="form-label">Kode Pendamping</label>
+                        <input type="text" class="form-control" id="pendamping" name="pendamping">
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="pendamping" class="form-label">Kode Pendamping</label>
-                    <input type="text" class="form-control" id="pendamping" name="pendamping">
-                </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save Booking</button>
@@ -108,23 +109,25 @@
                 <div class="modal-body">
                     <input type="hidden" id="edit_booking_id" name="booking_id">
                     <div class="mb-3">
-                        <label for="edit_booking_customer_id" class="form-label">Customer Name</label>
+                        <label for="edit_booking_customer_id" class="form-label">Nama Samaran Tamu</label>
                         <input type="text" class="form-control" id="edit_booking_customer_id" name="booking_customer_id" required>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_rfid" class="form-label">RFID</label>
-                        <input type="text" class="form-control" id="edit_rfid" name="rfid" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit_booking_room_id" class="form-label">Room ID</label>
+                        <label for="edit_booking_room_id" class="form-label">Nomor Room</label>
                         <input type="text" class="form-control" id="edit_booking_room_id" name="booking_room_id" required>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_booking_package_id" class="form-label">Package ID</label>
-                        <input type="text" class="form-control" id="edit_booking_package_id" name="booking_package_id" required>
+                        <label for="edit_booking_package_id" class="form-label">Jenis Layanan</label>
+                        {{-- <input type="text" class="form-control" id="edit_booking_package_id" name="booking_package_id" required> --}}
+                        <select class="form-control" id="edit_booking_package_id" name="booking_package_id">
+                            <option value="Layanan 1">Layanan 1</option>
+                            <option value="Layanan 2">Layanan 2</option>
+                            <option value="Layanan 3">Layanan 3</option>
+                            <option value="Layanan 4">Layanan 4</option>
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label for="edit_date" class="form-label">Date</label>
+                        <label for="edit_date" class="form-label">Waktu</label>
                         <input type="date" class="form-control" id="edit_date" name="date" required>
                     </div>
                     <div class="mb-3">
@@ -133,6 +136,14 @@
                             <option value="Masuk">Masuk</option>
                             <option value="Keluar">Keluar</option>
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rfid" class="form-label">Kode Gelang</label>
+                        <input type="text" class="form-control" id="edit_rfid" name="rfid" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pendamping" class="form-label">Kode Pendamping</label>
+                        <input type="text" class="form-control" id="edit_pendamping" name="pendamping">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -153,6 +164,7 @@
         $('#edit_booking_id').val(booking.booking_id);
         $('#edit_booking_customer_id').val(booking.booking_customer_id);
         $('#edit_rfid').val(booking.rfid);
+        $('#edit_pendamping').val(booking.pendamping);
         $('#edit_booking_room_id').val(booking.booking_room_id);
         $('#edit_booking_package_id').val(booking.booking_package_id);
         $('#edit_date').val(booking.date);
@@ -167,6 +179,9 @@
             url: $(this).attr('action'),
             method: $(this).attr('method'),
             data: $(this).serialize(),
+            complete: function() {
+                $('#editBookingForm')[0].reset();
+            },
             success: function(response) {
                 $('#editBookingModal').modal('hide');
                 $('#booking-table').DataTable().ajax.reload();
@@ -207,6 +222,7 @@
                 },
                 columns: [
                     { data: 'booking_id', name: 'booking_id' },
+                    { data: 'booking_customer_id', name: 'booking_customer_id' },
                     { data: 'rfid', name: 'rfid' },
                     { data: 'booking_room_id', name: 'booking_room_id' },
                     { data: 'booking_package_id', name: 'booking_package_id' },

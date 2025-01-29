@@ -16,9 +16,9 @@ class BookingController extends Controller
     {
         $bookings = Booking::query();
 
-        // if (request()->has('rfid')) {
-        //     $bookings->where('rfid', request('rfid'));
-        // }
+        if (request()->has('rfid')) {
+            $bookings->where('rfid', request('rfid'));
+        }
 
         return Datatables::of($bookings->get())
             ->addColumn('actions', function($booking){
@@ -70,6 +70,7 @@ class BookingController extends Controller
         $booking = Booking::where('booking_id', $id)->first();
         return response()->json($booking);
     }
+
 
     public function update(Request $request)
     {
