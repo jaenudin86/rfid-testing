@@ -26,6 +26,7 @@ class Booking extends Model
         'rfid',
         'datein',
         'dateout',
+        'pendamping'
     ];
 
     public $timestamps = false; // Set to true if you want to use created_at and updated_at

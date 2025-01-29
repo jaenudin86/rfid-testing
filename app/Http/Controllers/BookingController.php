@@ -57,6 +57,7 @@ class BookingController extends Controller
             'rfid' => 'required|string|max:100',
             'datein' => 'nullable|date',
             'dateout' => 'nullable|date',
+            'pendamping' => 'nullable|string|max:100'
         ]);
 
         Booking::create($request->all());
@@ -85,6 +86,7 @@ class BookingController extends Controller
             'rfid' => 'required|string|max:100',
             'datein' => 'nullable|date',
             'dateout' => 'nullable|date',
+            'pendamping' => 'nullable|string|max:100'
         ]);
 
         $booking = Booking::where('booking_id', $request->booking_id)->first();

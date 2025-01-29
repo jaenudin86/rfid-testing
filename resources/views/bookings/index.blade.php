@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container-fluid">
-    <h1>Booking List</h1>
+    <h1>Guest List    </h1>
     <div class="mb-3">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBookingModal">
-            Add New Booking
+            Add New Guest
         </button>
     </div>
     <div class="mb-3">
@@ -16,10 +16,11 @@
         <thead>
             <tr>
                 <th>Booking ID</th>
-                <th>No Kartu</th>
-                <th>Room ID</th>
-                <th>Package ID</th>
-                <th>Date</th>
+                <th>Nama Samaran Tamu</th>
+                <th>Kode Gelang</th>
+                <th>Nomor Room</th>
+                <th>Jenis Layanan</th>
+                <th>Waktu</th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
@@ -43,23 +44,29 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="booking_customer_id" class="form-label">Customer Name</label>
+                        <label for="booking_customer_id" class="form-label">Nama Samaran Tamu</label>
                         <input type="text" class="form-control" id="booking_customer_id" name="booking_customer_id" required>
                     </div>
+
                     <div class="mb-3">
-                        <label for="rfid" class="form-label">Nomer Kartu</label>
-                        <input type="text" class="form-control" id="rfid" name="rfid" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="room_id" class="form-label">Room ID</label>
+                        <label for="room_id" class="form-label">Nomor Room                        </label>
                         <input type="text" class="form-control" id="booking_room_id" name="booking_room_id" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="package_id" class="form-label">Package ID</label>
+                    {{-- <div class="mb-3">
+                        <label for="package_id" class="form-label">Jenis Layanan</label>
                         <input type="text" class="form-control" id="booking_package_id" name="booking_package_id" required>
+                    </div> --}}
+                    <div class="mb-3">
+                        <label for="booking_package_id" class="form-label">Jenis Layanan</label>
+                        <select class="form-control" id="booking_package_id" name="booking_package_id" required>
+                            <option value="Layanan 1">Layanan 1</option>
+                            <option value="Layanan 2">Layanan 2</option>
+                            <option value="Layanan 3">Layanan 3</option>
+                            <option value="Layanan 4">Layanan 4</option>
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label for="date" class="form-label">Date</label>
+                        <label for="date" class="form-label">Waktu</label>
                         <input type="date" class="form-control" id="date" name="date" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" required>
                     </div>
                     <div class="mb-3">
@@ -70,6 +77,14 @@
 
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="rfid" class="form-label">Kode Gelang</label>
+                        <input type="text" class="form-control" id="rfid" name="rfid" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="pendamping" class="form-label">Kode Pendamping</label>
+                    <input type="text" class="form-control" id="pendamping" name="pendamping">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
